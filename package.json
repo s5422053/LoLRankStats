@@ -7,7 +7,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "serve": "netlify functions:serve",
+    "netli": "netlify dev"
   },
   "keywords": [],
   "author": "",
@@ -19,6 +21,7 @@
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.2.1",
+    "netlify-cli": "^17.11.1",
     "vite": "^5.0.10"
   }
 }

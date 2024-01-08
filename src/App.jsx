@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios'; // axiosをインポート
 
 function App() {
+
   const [riotId, setRiotId] = useState('');
   const [tagLine, setTagLine] = useState('');
   const [stats, setStats] = useState(null);
@@ -13,7 +14,7 @@ function App() {
       const response = await axios.get(`/.netlify/functions/api?gameName=${riotId}&tagLine=${tagLine}`);
       const result = response.data;
       setStats(result);
-      console.log(`${stats.tier}`);
+      console.log(`${result.body}`);
     } catch (error) {
       // エラーハンドリング
       console.error('Error fetching player stats:', error);

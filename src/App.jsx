@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { getPlayerStats } from './api';
+import axios from 'axios'; // axiosをインポート
 
 function App() {
   const [riotId, setRiotId] = useState('');
@@ -9,11 +9,14 @@ function App() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const result = await getPlayerStats(riotId,tagLine);
+      // Netlify FunctionのURLを指定してリクエストを送信
+      const response = await axios.get(`/.netlify/functions/api?gameName=${riotId}&tagLine=${tagLine}`);
+      const result = response.data;
       setStats(result);
       console.log(`${stats.tier}`);
     } catch (error) {
       // エラーハンドリング
+      console.error('Error fetching player stats:', error);
     }
   };
 
@@ -38,7 +41,7 @@ function App() {
       {stats && (
         <div>
           <h2>{stats.summonerName}</h2>
-          {/* ここにランク戦の勝率と最も使用しているチャンピオンを表示するコードを追加 */}
+          <h3>{stats.tier} {stats.rank}</h3>
         </div>
       )}
     </div>

@@ -2,7 +2,8 @@
 
 const axios = require('axios');
 
-const API_KEY = 'RGAPI-04d556db-9b34-40af-ba69-a211e30054e3';
+const API_KEY = 'RGAPI-66aa6442-5d5a-4976-bdae-dad7f02b909e';
+
 
 exports.handler = async (event, context) => {
   try {

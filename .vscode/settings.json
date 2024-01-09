@@ -1,3 +1,6 @@
 {
-    "git.openRepositoryInParentFolders": "never"
+    "git.openRepositoryInParentFolders": "never",
+    "editor.quickSuggestions": {
+        "strings": true
+      }
 }

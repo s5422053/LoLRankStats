@@ -15,7 +15,7 @@ function App() {
       const response = await axios.get(`/.netlify/functions/api?gameName=${riotId}&tagLine=${tagLine}`);
       const result = response.data;
       setStats(result);
-      setImage(`./${result.tier}.png`);
+      setImage(`./static/${result.tier}.png`);
     } catch (error) {
       // エラーハンドリング
       console.error('Error fetching player stats:', error);

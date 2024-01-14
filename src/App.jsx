@@ -7,18 +7,23 @@ function App() {
   const [tagLine, setTagLine] = useState('');
   const [stats, setStats] = useState(null);
   const [image,setImage] = useState('');
+  const [error, setError] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       // Netlify FunctionのURLを指定してリクエストを送信
-      const response = await axios.get(`/.netlify/functions/api?gameName=${riotId}&tagLine=${tagLine}`);
+      const response = await axios.get(`/.netlify/functions/api?gameName=${riotId}&tagLine=${tagLine}`);      
       const result = response.data;
       setStats(result);
-      setImage(`https://lolrankstatsimages.netlify.app/${result.tier}.png`);
+      setError(null);
+      setImage(`https://lolrankstatsimages.netlify.app/${result.tier}.png`);      
     } catch (error) {
       // エラーハンドリング
+      setError('The player does not exist or does not play ranked games');
+      setStats(null);
       console.error('Error fetching player stats:', error);
+      
     }
   };
 
@@ -55,11 +60,13 @@ function App() {
               <p className='h-1/3 text-2xl'>{riotId}</p>
               <p className='h-1/2 text-4xl '>{stats.tier} {stats.rank}</p>
               <p className='h-1/6 text-base' >{stats.wins}W {stats.losses}L  {Math.round(stats.wins * 100 / (stats.losses + stats.wins))}% WinRate</p>
-              {error && <p style={{ color: 'red' }}>{error}</p>}
+              
             </div>
+            
           </div>
         )}
       </div>
+      {error && <p className='text-red-700 text-2xl sm:mx-auto sm:w-full sm:max-w-fit'>{error}</p>}
     </div>
   );
 }

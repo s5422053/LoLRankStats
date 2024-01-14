@@ -55,6 +55,7 @@ function App() {
               <p className='h-1/3 text-2xl'>{riotId}</p>
               <p className='h-1/2 text-4xl '>{stats.tier} {stats.rank}</p>
               <p className='h-1/6 text-base' >{stats.wins}W {stats.losses}L  {Math.round(stats.wins * 100 / (stats.losses + stats.wins))}% WinRate</p>
+              {error && <p style={{ color: 'red' }}>{error}</p>}
             </div>
           </div>
         )}

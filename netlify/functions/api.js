@@ -41,9 +41,9 @@ exports.handler = async (event, context) => {
     };
   } catch (error) {
     console.error('Error fetching player stats:', error);
-    return {
-      statusCode: 500,
-      body: JSON.stringify({ error: 'Failed to fetch player stats' })
-    };
+    if (error.response ) {
+      // ユーザーが存在しない場合のエラー
+      return { error: 'The player does not exist or does not play ranked games' };
+    }
   }
 };
